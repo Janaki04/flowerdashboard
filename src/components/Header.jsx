@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
   Menu, 
   Search, 
@@ -14,8 +15,10 @@ import {
 } from 'lucide-react';
 
 export default function Header({ onMenuClick }) {
+  const navigate = useNavigate();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const [userData, setUserData] = useState({ name: 'ArtTemplate', detail: 'Manager' });
 
   const [notifications, setNotifications] = useState([
     { id: 1, name: "Regina Cooper", time: "1 min ago", active: true, img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150" },
@@ -25,6 +28,39 @@ export default function Header({ onMenuClick }) {
     { id: 5, name: "Calvin Flores", time: "Yesterday", active: true, img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150" },
     { id: 6, name: "Robert Edwards", time: "Yesterday", active: true, img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150" }
   ]);
+
+  // Read saved dynamic user account specifics on initial mount
+  useEffect(() => {
+    const sessionData = localStorage.getItem('userSession');
+    const registeredData = localStorage.getItem('registeredUser');
+
+    if (sessionData) {
+      const parsedSession = JSON.parse(sessionData);
+      
+      if (registeredData) {
+        const parsedRegister = JSON.parse(registeredData);
+        // Prioritize full name if available
+        setUserData({
+          name: parsedRegister.fullName || parsedSession.email,
+          detail: parsedSession.email
+        });
+      } else {
+        setUserData({
+          name: parsedSession.email.split('@')[0],
+          detail: parsedSession.email
+        });
+      }
+    }
+  }, []);
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    // Destructive mutation removing auth states
+    localStorage.removeItem('userSession');
+    setIsProfileOpen(false);
+    // Instant programmatic state navigation bounce
+    navigate('/login');
+  };
 
   const removeNotification = (id, e) => {
     e.stopPropagation(); 
@@ -122,12 +158,14 @@ export default function Header({ onMenuClick }) {
             className="flex items-center gap-2.5 pl-2 pr-1 py-1.5 hover:bg-gray-50 rounded-xl transition-colors focus:outline-none"
           >
             <img 
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80" 
-              alt="ArtTemplate Profile" 
-              className="w-9 h-9 rounded-full object-cover" 
+              src="https://images.unsplash.com/photo-1111111111111-111111111111?w=150" 
+              fallbacksrc="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150"
+              onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150" }}
+              alt="Profile Display" 
+              className="w-9 h-9 rounded-full object-cover border border-gray-100 shadow-sm bg-gray-50" 
             />
-            <span className="text-gray-700 font-semibold text-[14px] hidden sm:block">
-              ArtTemplate
+            <span className="text-gray-700 font-bold text-[14px] hidden sm:block max-w-[100px] truncate">
+              {userData.name}
             </span>
             <ChevronDown size={14} className={`text-gray-400 transition-transform duration-200 ${isProfileOpen ? 'rotate-180' : ''}`} />
           </button>
@@ -137,27 +175,37 @@ export default function Header({ onMenuClick }) {
               <div onClick={() => setIsProfileOpen(false)} className="fixed inset-0 z-40" />
               <div className="absolute right-0 mt-3 w-64 bg-white rounded-2xl border border-gray-100 shadow-[0_10px_30px_rgba(0,0,0,0.08)] py-3 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                 <div className="flex items-center gap-3 px-4 py-2.5 mb-2">
-                  <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150" alt="" className="w-11 h-11 rounded-full object-cover" />
-                  <div className="flex-1 min-w-0">
-                    <h4 className="text-[14px] font-bold text-gray-800 truncate">ArtTemplate</h4>
-                    <p className="text-xs text-gray-400 font-medium mt-0.5">Manager</p>
+                  <img 
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150" 
+                    alt="" 
+                    className="w-11 h-11 rounded-full object-cover bg-gray-50" 
+                  />
+                  <div className="flex-1 min-w-0 text-left">
+                    <h4 className="text-[14px] font-bold text-gray-800 truncate">{userData.name}</h4>
+                    <p className="text-xs text-gray-400 font-medium mt-0.5 truncate">{userData.detail}</p>
                   </div>
-                  <span className="flex items-center justify-center w-4 h-4 text-[10px] font-bold text-white bg-red-400 rounded-full">8</span>
+                  <span className="flex items-center justify-center w-4 h-4 text-[10px] font-bold text-white bg-red-400 rounded-full flex-shrink-0">8</span>
                 </div>
                 <hr className="border-gray-100/70 my-1 mx-4" />
-                <div className="px-2 py-1 space-y-0.5">
-                  <a href="#profile" className="flex items-center gap-3 px-3 py-2 text-[13.5px] font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50/80 rounded-xl transition-all"><User size={17} className="text-gray-400" /><span>My Profile</span></a>
-                  <a href="#messages" className="flex items-center gap-3 px-3 py-2 text-[13.5px] font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50/80 rounded-xl transition-all"><Mail size={17} className="text-gray-400" /><span>My Messages</span></a>
-                  <a href="#tasks" className="flex items-center gap-3 px-3 py-2 text-[13.5px] font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50/80 rounded-xl transition-all"><CheckSquare size={17} className="text-gray-400" /><span>My Tasks</span></a>
+                <div className="px-2 py-1 space-y-0.5 text-left">
+                  <a href="#profile" onClick={() => setIsProfileOpen(false)} className="flex items-center gap-3 px-3 py-2 text-[13.5px] font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50/80 rounded-xl transition-all"><User size={17} className="text-gray-400" /><span>My Profile</span></a>
+                  <a href="#messages" onClick={() => setIsProfileOpen(false)} className="flex items-center gap-3 px-3 py-2 text-[13.5px] font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50/80 rounded-xl transition-all"><Mail size={17} className="text-gray-400" /><span>My Messages</span></a>
+                  <a href="#tasks" onClick={() => setIsProfileOpen(false)} className="flex items-center gap-3 px-3 py-2 text-[13.5px] font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50/80 rounded-xl transition-all"><CheckSquare size={17} className="text-gray-400" /><span>My Tasks</span></a>
                 </div>
                 <hr className="border-gray-100/70 my-1 mx-4" />
-                <div className="px-2 py-1 space-y-0.5">
-                  <a href="#settings" className="flex items-center gap-3 px-3 py-2 text-[13.5px] font-medium text-gray-700 bg-gray-50/60 font-semibold rounded-xl transition-all"><Settings size={17} className="text-gray-500" /><span>Settings</span></a>
-                  <a href="#lock" className="flex items-center gap-3 px-3 py-2 text-[13.5px] font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50/80 rounded-xl transition-all"><Lock size={17} className="text-gray-400" /><span>Lock Screen</span></a>
+                <div className="px-2 py-1 space-y-0.5 text-left">
+                  <a href="#settings" onClick={() => setIsProfileOpen(false)} className="flex items-center gap-3 px-3 py-2 text-[13.5px] font-medium text-gray-700 bg-gray-50/60 font-semibold rounded-xl transition-all"><Settings size={17} className="text-gray-500" /><span>Settings</span></a>
+                  <a href="#lock" onClick={() => setIsProfileOpen(false)} className="flex items-center gap-3 px-3 py-2 text-[13.5px] font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50/80 rounded-xl transition-all"><Lock size={17} className="text-gray-400" /><span>Lock Screen</span></a>
                 </div>
                 <hr className="border-gray-100/70 my-1 mx-4" />
-                <div className="px-2 pt-1">
-                  <a href="#logout" className="flex items-center gap-3 px-3 py-2 text-[13.5px] font-medium text-gray-500 hover:text-red-500 hover:bg-red-50/40 rounded-xl transition-all"><LogOut size={17} /><span>Logout</span></a>
+                <div className="px-2 pt-1 text-left">
+                  <button 
+                    onClick={handleLogout}
+                    className="w-full flex items-center gap-3 px-3 py-2 text-[13.5px] font-medium text-gray-500 hover:text-red-500 hover:bg-red-50/40 rounded-xl transition-all cursor-pointer text-left border-0 bg-transparent"
+                  >
+                    <LogOut size={17} />
+                    <span>Logout</span>
+                  </button>
                 </div>
               </div>
             </>

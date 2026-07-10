@@ -1,15 +1,16 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-   theme: {
+  theme: {
     extend: {
-        fontFamily: {
-        sans: ['"Nunito Sans"', 'sans-serif'],
+      fontFamily: {
+        // This overrides the default 'font-sans' clean stack with Poppins project-wide
+        sans: ['Poppins', 'sans-serif'],
       },
     },
   },
   plugins: [],
-};
+}

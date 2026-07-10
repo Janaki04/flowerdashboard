@@ -15,7 +15,7 @@ const DashboardLayout = ({ children }) => {
         <Header onMenuClick={() => setIsSidebarOpen(true)} />
 
         <main className="flex-1 overflow-y-auto overflow-x-hidden bg-[#f8fafc]">
-          <div className="p-4 sm:p-6 lg:p-8 max-w-[1600px] mx-auto w-full">
+          <div className="p-4 sm:p-6 lg:pt-2 lg:p-8 max-w-[1600px] mx-auto w-full">
             {children}
           </div>
         </main>
