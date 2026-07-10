@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard, 
@@ -16,7 +16,7 @@ import {
   ChevronDown,
   ChevronRight
 } from 'lucide-react';
-import imagelogo from "../assets/Frame 3473231.png"
+import imagelogo from "../assets/Frame 3473231.png";
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
   const location = useLocation();
@@ -31,7 +31,6 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
   const menuItems = [
     { name: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
-    // Removed direct parent path to allow pure toggling
     { name: 'E-Commerce', icon: ShoppingCart, hasSubmenu: true, 
       submenuItems: [
         { name: 'Products', path: '/ecommerce/products' },
@@ -59,6 +58,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       <button 
         onClick={() => setIsOpen(!isOpen)}
         className="fixed top-4 left-4 z-50 p-2 text-gray-700 bg-white border border-gray-200 rounded-md shadow-sm lg:hidden hover:bg-gray-50 focus:outline-none"
+        aria-label="Toggle Menu"
       >
         {isOpen ? <X size={20} /> : <Menu size={20} />}
       </button>
@@ -105,10 +105,10 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
               return (
                 <div key={item.name} className="flex flex-col space-y-1">
                   {hasSubmenu ? (
-                    /* Render a regular button for menus that just expand */
                     <button
                       onClick={() => toggleSubmenu(item.name)}
                       className={isParentActive ? activeClass : inactiveClass}
+                      aria-expanded={isSubmenuOpen}
                     >
                       <div className="flex items-center gap-3">
                         <item.icon size={20} className="stroke-[1.8]" />
@@ -117,7 +117,6 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                       {isSubmenuOpen ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
                     </button>
                   ) : (
-                    /* Standard link items */
                     <NavLink
                       to={item.path}
                       onClick={() => setIsOpen(false)}
@@ -145,8 +144,12 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                           onClick={() => setIsOpen(false)}
                           className={({ isActive }) => isActive ? activeSubClass : inactiveSubClass}
                         >
-                          <span className={`w-1.5 h-1.5 rounded-full ${location.pathname === subItem.path ? 'bg-gray-900' : 'bg-gray-400'}`} />
-                          <span className="text-[14px]">{subItem.name}</span>
+                          {({ isActive }) => (
+                            <>
+                              <span className={`w-1.5 h-1.5 rounded-full transition-colors duration-200 ${isActive ? 'bg-gray-900' : 'bg-gray-400'}`} />
+                              <span className="text-[14px]">{subItem.name}</span>
+                            </>
+                          )}
                         </NavLink>
                       ))}
                     </div>

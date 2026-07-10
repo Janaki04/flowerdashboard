@@ -18,7 +18,7 @@ export default function Products() {
   const [activeTab, setActiveTab] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedIds, setSelectedIds] = useState([2, 3, 4]); 
-  const [viewMode, setViewMode] = useState('grid'); 
+  const [viewMode, setViewMode] = useState('list'); 
   
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
