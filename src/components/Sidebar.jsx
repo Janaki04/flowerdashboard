@@ -7,7 +7,6 @@ import {
   Calendar, 
   Mail, 
   MessageSquare, 
-  FolderOpen, 
   FileText, 
   Notebook, 
   Contact,
@@ -26,14 +25,14 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     'E-Commerce': true 
   });
 
-  const toggleSubmenu = (name, e) => {
-    e.preventDefault(); 
+  const toggleSubmenu = (name) => {
     setOpenSubmenus(prev => ({ ...prev, [name]: !prev[name] }));
   };
 
   const menuItems = [
     { name: 'Dashboard', icon: LayoutDashboard, path: '/dashboard' },
-    { name: 'E-Commerce', icon: ShoppingCart, path: '/ecommerce', hasSubmenu: true, 
+    // Removed direct parent path to allow pure toggling
+    { name: 'E-Commerce', icon: ShoppingCart, hasSubmenu: true, 
       submenuItems: [
         { name: 'Products', path: '/ecommerce/products' },
         { name: 'Orders', path: '/ecommerce/orders' },
@@ -49,8 +48,8 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     { name: 'Contacts', icon: Contact, path: '/contacts' },
   ];
 
-  const activeClass = "flex items-center justify-between px-4 py-3 text-gray-900 bg-[#c2e799] rounded-xl font-semibold transition-all duration-200 cursor-pointer";
-  const inactiveClass = "flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-xl font-medium transition-all duration-200 cursor-pointer";
+  const activeClass = "flex items-center justify-between px-4 py-3 text-gray-900 bg-[#c2e799] rounded-xl font-semibold transition-all duration-200 cursor-pointer w-full text-left";
+  const inactiveClass = "flex items-center justify-between px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-xl font-medium transition-all duration-200 cursor-pointer w-full text-left";
 
   const activeSubClass = "flex items-center gap-3 px-10 py-3 text-gray-900 bg-[#eef7e2] rounded-xl font-semibold transition-all duration-200";
   const inactiveSubClass = "flex items-center gap-3 px-10 py-3 text-gray-600 hover:bg-gray-50 rounded-xl font-medium transition-all duration-200";
@@ -80,7 +79,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       `}>
         
         <div className="flex items-center gap-3 px-2 mb-6 mt-12 lg:mt-0">
-         <img src={imagelogo} alt="Logo" className="w-28 h-8" />
+          <img src={imagelogo} alt="Logo" className="w-28 h-8" />
         </div>
 
         <div className="relative mb-6">
@@ -105,30 +104,37 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
               return (
                 <div key={item.name} className="flex flex-col space-y-1">
-                  <NavLink
-                    to={item.path}
-                    onClick={(e) => {
-                      if (hasSubmenu) {
-                        toggleSubmenu(item.name, e);
-                      } else {
-                        setIsOpen(false);
-                      }
-                    }}
-                    className={({ isActive }) => (isActive || isParentActive) ? activeClass : inactiveClass}
-                  >
-                    <div className="flex items-center gap-3">
-                      <item.icon size={20} className="stroke-[1.8]" />
-                      <span className="text-[15px]">{item.name}</span>
-                    </div>
+                  {hasSubmenu ? (
+                    /* Render a regular button for menus that just expand */
+                    <button
+                      onClick={() => toggleSubmenu(item.name)}
+                      className={isParentActive ? activeClass : inactiveClass}
+                    >
+                      <div className="flex items-center gap-3">
+                        <item.icon size={20} className="stroke-[1.8]" />
+                        <span className="text-[15px]">{item.name}</span>
+                      </div>
+                      {isSubmenuOpen ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
+                    </button>
+                  ) : (
+                    /* Standard link items */
+                    <NavLink
+                      to={item.path}
+                      onClick={() => setIsOpen(false)}
+                      className={({ isActive }) => isActive ? activeClass : inactiveClass}
+                    >
+                      <div className="flex items-center gap-3">
+                        <item.icon size={20} className="stroke-[1.8]" />
+                        <span className="text-[15px]">{item.name}</span>
+                      </div>
 
-                    {hasSubmenu ? (
-                      isSubmenuOpen ? <ChevronDown size={18} /> : <ChevronRight size={18} />
-                    ) : item.badge ? (
-                      <span className="flex items-center justify-center min-w-5 h-5 px-1.5 text-[11px] font-bold text-white bg-red-500 rounded-full">
-                        {item.badge}
-                      </span>
-                    ) : null}
-                  </NavLink>
+                      {item.badge && (
+                        <span className="flex items-center justify-center min-w-5 h-5 px-1.5 text-[11px] font-bold text-white bg-red-500 rounded-full">
+                          {item.badge}
+                        </span>
+                      )}
+                    </NavLink>
+                  )}
 
                   {hasSubmenu && isSubmenuOpen && (
                     <div className="flex flex-col space-y-1 mt-1 transition-all duration-200">
