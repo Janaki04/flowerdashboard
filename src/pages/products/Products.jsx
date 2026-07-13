@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { Download, Plus, List, Grid, Search, SlidersHorizontal, ChevronDown, MoreVertical, ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, Image as ImageIcon, Check, Calendar as CalendarIcon, Printer, FileSpreadsheet, FileText, FileCode, X } from 'lucide-react';
 import AddProductDrawer from './AddProductDrawer';
+import ProductDetailModal from './ProductDetailModal';
 
 const initialProducts = [
   { id: 1, name: "MacBook Pro 15 Retina Touch Bar MV902", productNo: "#790841", category: "Notebook", date: "12.09.20", price: 2500, status: "Available" },
@@ -14,6 +15,13 @@ const initialProducts = [
 ];
 
 export default function Products() {
+  const [selectedProductForModal, setSelectedProductForModal] = useState(null);
+const [isModalOpen, setIsModalOpen] = useState(false);
+
+const handleOpenModal = (product) => {
+  setSelectedProductForModal(product);
+  setIsModalOpen(true);
+};
   const [productsList, setProductsList] = useState(initialProducts);
   const [activeTab, setActiveTab] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
@@ -330,7 +338,10 @@ export default function Products() {
                       <span className={`inline-flex items-center px-2.5 py-1 text-xs font-bold rounded-lg ${product.status === 'Available' ? 'bg-[#e6f7f4] text-[#22c55e]' : 'bg-orange-50 text-orange-500'}`}>{product.status}</span>
                     </td>
                     <td className="py-4 pr-6 text-right">
-                      <button className="text-gray-400 hover:text-gray-600"><MoreVertical size={18} /></button>
+                      <button 
+                      onClick={() => handleOpenModal(product)} 
+    className="text-gray-400 hover:text-gray-600"
+                      className="text-gray-400 hover:text-gray-600"><MoreVertical size={18} /></button>
                     </td>
                   </tr>
                 ))}
@@ -396,6 +407,11 @@ export default function Products() {
         isOpen={isDrawerOpen} 
         onClose={() => setIsDrawerOpen(false)} 
         onSave={handleAddNewProductSave} 
+      />
+      <ProductDetailModal 
+        isOpen={isModalOpen}
+        onClose={() => { setIsModalOpen(false); setSelectedProductForModal(null); }}
+        product={selectedProductForModal}
       />
 
     </div>

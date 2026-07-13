@@ -4,6 +4,9 @@ import Dashboard from './pages/dashboard/Dashboard'
 import Products from "./pages/products/Products"
 import Login from "./pages/auth/Login" 
 import SignUp from "./pages/auth/SignUp" 
+import Orders from './pages/orders/Orders'
+import Customers from './pages/customers/Customers'
+import Calendar from './pages/calender/Calendar'
 
 const TasksPage = () => (
   <div className="p-6 bg-white rounded-2xl border border-gray-100 shadow-sm">
@@ -68,11 +71,11 @@ function App() {
           <Route path="/ecommerce">
             <Route index element={<Navigate to="/ecommerce/products" replace />} />
             <Route path="products" element={<Products />} />
-            <Route path="orders" element={<EmptyView name="Orders" />} />
-            <Route path="customers" element={<EmptyView name="Customers" />} />
+            <Route path="orders" element={<Orders name="Orders" />} />
+            <Route path="customers" element={<Customers name="Customers" />} />
           </Route>
 
-          <Route path="/calendar" element={<EmptyView name="Calendar" />} />
+          <Route path="/calendar" element={<Calendar name="Calendar" />} />
           <Route path="/mail" element={<EmptyView name="Mail" />} />
           <Route path="/chat" element={<EmptyView name="Chat" />} />
           <Route path="/projects" element={<EmptyView name="Projects" />} />
