@@ -27,8 +27,8 @@ export default function Calendar() {
   ];
 
   return (
-    <div className="p-6 md:p-10 bg-[#f8f9fa] min-h-screen font-sans antialiased text-[#6c757d]">
-      <div className="max-w-[1440px] mx-auto space-y-6">
+    <div className="bg-[#f8f9fa] min-h-screen font-sans antialiased text-[#6c757d]">
+      <div className="mx-auto space-y-6">
         
         <div className="flex justify-between items-center">
           <h1 className="text-3xl font-semibold text-[#212529] tracking-tight">Calendar</h1>

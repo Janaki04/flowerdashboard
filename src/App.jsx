@@ -11,14 +11,14 @@ import Calendar from './pages/calender/Calendar'
 const TasksPage = () => (
   <div className="p-6 bg-white rounded-2xl border border-gray-100 shadow-sm">
     <h2 className="text-xl font-bold text-gray-800">Task Management</h2>
-    <p className="text-gray-500 mt-1">Track and organize your day-to-day operations.</p>
+    <p className="text-gray-500 mt-1">Screen is in still progress</p>
   </div>
 );
 
 const EmptyView = ({ name }) => (
   <div className="p-6 bg-white rounded-2xl border border-gray-100 shadow-sm">
     <h2 className="text-xl font-bold text-gray-800">{name} Screen</h2>
-    <p className="text-gray-500 mt-1">This layout placeholder serves the /{name.toLowerCase().replace(/\s+/g, '-')} view.</p>
+    <p className="text-gray-500 mt-1">Screen is in still progress</p>
   </div>
 );
 
