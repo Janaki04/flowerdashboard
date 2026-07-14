@@ -193,8 +193,6 @@ const handleOpenModal = (product) => {
               </div>
             )}
           </div>
-
-          {/* Plus Open Control Action Handle Toggle Button */}
           <button 
             onClick={() => setIsDrawerOpen(true)}
             className="flex items-center justify-center w-10 h-10 bg-[#22c55e] hover:bg-green-600 text-white rounded-xl shadow-sm flex-shrink-0 active:scale-[0.97] transition-all"

@@ -27,7 +27,7 @@ export default function Orders() {
   const [ordersList] = useState(initialOrders);
   const [activeTab, setActiveTab] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedIds, setSelectedIds] = useState([2, 3, 4]); // Presets from screenshot
+  const [selectedIds, setSelectedIds] = useState([2, 3, 4]); 
   
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [isActionsOpen, setIsActionsOpen] = useState(false);

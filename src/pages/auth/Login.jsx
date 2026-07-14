@@ -12,7 +12,7 @@ export default function Login() {
   const navigate=useNavigate()
 
   useEffect(() => {
-    const savedEmail = localStorage.getItem('rememberedEmail');
+    const savedEmail = sessionStorage.getItem('rememberedEmail');
     if (savedEmail) {
       setEmail(savedEmail);
       setRememberMe(true);
@@ -28,12 +28,12 @@ export default function Login() {
     }
 
     if (rememberMe) {
-      localStorage.setItem('rememberedEmail', email);
+      sessionStorage.setItem('rememberedEmail', email);
     } else {
-      localStorage.removeItem('rememberedEmail');
+      sessionStorage.removeItem('rememberedEmail');
     }
 
-    localStorage.setItem('userSession', JSON.stringify({ email, isLoggedIn: true }));
+    sessionStorage.setItem('userSession', JSON.stringify({ email, isLoggedIn: true }));
 
     setAlertMessage(`Success! Logged in successfully as ${email}`);
     navigate('/dashboard');

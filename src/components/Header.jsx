@@ -55,10 +55,8 @@ export default function Header({ onMenuClick }) {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    // Destructive mutation removing auth states
     localStorage.removeItem('userSession');
     setIsProfileOpen(false);
-    // Instant programmatic state navigation bounce
     navigate('/login');
   };
 

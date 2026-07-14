@@ -7,13 +7,9 @@ import SignUp from "./pages/auth/SignUp"
 import Orders from './pages/orders/Orders'
 import Customers from './pages/customers/Customers'
 import Calendar from './pages/calender/Calendar'
+import TasksPage from './pages/tasks/TasksPage'
+import ProjectsPage from './pages/projects/ProjectsPage'
 
-const TasksPage = () => (
-  <div className="p-6 bg-white rounded-2xl border border-gray-100 shadow-sm">
-    <h2 className="text-xl font-bold text-gray-800">Task Management</h2>
-    <p className="text-gray-500 mt-1">Screen is in still progress</p>
-  </div>
-);
 
 const EmptyView = ({ name }) => (
   <div className="p-6 bg-white rounded-2xl border border-gray-100 shadow-sm">
@@ -76,12 +72,11 @@ function App() {
           </Route>
 
           <Route path="/calendar" element={<Calendar name="Calendar" />} />
+          <Route path="/projects" element={<ProjectsPage name="Projects" />} />
+          <Route path="/file-manager" element={<EmptyView name="File Manager" />} />
           <Route path="/mail" element={<EmptyView name="Mail" />} />
           <Route path="/chat" element={<EmptyView name="Chat" />} />
-          <Route path="/projects" element={<EmptyView name="Projects" />} />
-          <Route path="/file-manager" element={<EmptyView name="File Manager" />} />
           <Route path="/notes" element={<EmptyView name="Notes" />} />
-          <Route path="/contacts" element={<EmptyView name="Contacts" />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/dashboard" replace />} />

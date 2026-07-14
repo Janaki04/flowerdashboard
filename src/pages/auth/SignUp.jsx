@@ -35,7 +35,7 @@ export default function SignUp() {
     }
 
     const newUser = { fullName, email, password };
-    localStorage.setItem('registeredUser', JSON.stringify(newUser));
+    sessionStorage.setItem('registeredUser', JSON.stringify(newUser));
 
     setAlertMessage(`Success! Account created for ${fullName}`);
     navigate('/dashboard');

@@ -39,12 +39,11 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       ]
     },
     { name: 'Calendar', icon: Calendar, path: '/calendar' },
-    { name: 'Mail', icon: Mail, path: '/mail', badge: 8 },
-    { name: 'Chat', icon: MessageSquare, path: '/chat' },
     { name: 'Task', icon: ClipboardList, path: '/task' },
+    { name: 'Projects', icon: Notebook, path: '/projects' },
+      { name: 'Mail', icon: Mail, path: '/mail', badge: 0 },
+    { name: 'Chat', icon: MessageSquare, path: '/chat' },
     { name: 'File Manager', icon: FileText, path: '/file-manager' },
-    { name: 'Notes', icon: Notebook, path: '/notes' },
-    { name: 'Contacts', icon: Contact, path: '/contacts' },
   ];
 
   const activeClass = "flex items-center justify-between px-4 py-3 text-gray-900 bg-[#c2e799] rounded-xl font-semibold transition-all duration-200 cursor-pointer w-full text-left";
