@@ -338,7 +338,7 @@ const handleOpenModal = (product) => {
                     <td className="py-4 pr-6 text-right">
                       <button 
                       onClick={() => handleOpenModal(product)} 
-    className="text-gray-400 hover:text-gray-600"
+                      className="text-gray-400 hover:text-gray-600"
                       className="text-gray-400 hover:text-gray-600"><MoreVertical size={18} /></button>
                     </td>
                   </tr>

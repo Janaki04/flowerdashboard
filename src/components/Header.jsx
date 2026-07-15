@@ -31,8 +31,8 @@ export default function Header({ onMenuClick }) {
 
   // Read saved dynamic user account specifics on initial mount
   useEffect(() => {
-    const sessionData = localStorage.getItem('userSession');
-    const registeredData = localStorage.getItem('registeredUser');
+    const sessionData = sessionStorage.getItem('userSession');
+    const registeredData = sessionStorage.getItem('registeredUser');
 
     if (sessionData) {
       const parsedSession = JSON.parse(sessionData);
@@ -55,7 +55,7 @@ export default function Header({ onMenuClick }) {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    localStorage.removeItem('userSession');
+    sessionStorage.removeItem('userSession');
     setIsProfileOpen(false);
     navigate('/login');
   };
@@ -156,7 +156,7 @@ export default function Header({ onMenuClick }) {
             className="flex items-center gap-2.5 pl-2 pr-1 py-1.5 hover:bg-gray-50 rounded-xl transition-colors focus:outline-none"
           >
             <img 
-              src="https://images.unsplash.com/photo-1111111111111-111111111111?w=150" 
+              src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" 
               fallbacksrc="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150"
               onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150" }}
               alt="Profile Display" 
@@ -174,7 +174,7 @@ export default function Header({ onMenuClick }) {
               <div className="absolute right-0 mt-3 w-64 bg-white rounded-2xl border border-gray-100 shadow-[0_10px_30px_rgba(0,0,0,0.08)] py-3 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                 <div className="flex items-center gap-3 px-4 py-2.5 mb-2">
                   <img 
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150" 
+                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150" 
                     alt="" 
                     className="w-11 h-11 rounded-full object-cover bg-gray-50" 
                   />
@@ -186,7 +186,19 @@ export default function Header({ onMenuClick }) {
                 </div>
                 <hr className="border-gray-100/70 my-1 mx-4" />
                 <div className="px-2 py-1 space-y-0.5 text-left">
-                  <a href="#profile" onClick={() => setIsProfileOpen(false)} className="flex items-center gap-3 px-3 py-2 text-[13.5px] font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50/80 rounded-xl transition-all"><User size={17} className="text-gray-400" /><span>My Profile</span></a>
+                  {/* UPDATED PROFILE LINK */}
+                  <a 
+                    href="#profile" 
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsProfileOpen(false);
+                      navigate('/profile');
+                    }} 
+                    className="flex items-center gap-3 px-3 py-2 text-[13.5px] font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50/80 rounded-xl transition-all"
+                  >
+                    <User size={17} className="text-gray-400" />
+                    <span>My Profile</span>
+                  </a>
                   <a href="#messages" onClick={() => setIsProfileOpen(false)} className="flex items-center gap-3 px-3 py-2 text-[13.5px] font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50/80 rounded-xl transition-all"><Mail size={17} className="text-gray-400" /><span>My Messages</span></a>
                   <a href="#tasks" onClick={() => setIsProfileOpen(false)} className="flex items-center gap-3 px-3 py-2 text-[13.5px] font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50/80 rounded-xl transition-all"><CheckSquare size={17} className="text-gray-400" /><span>My Tasks</span></a>
                 </div>

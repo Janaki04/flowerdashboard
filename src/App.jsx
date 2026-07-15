@@ -9,17 +9,22 @@ import Customers from './pages/customers/Customers'
 import Calendar from './pages/calender/Calendar'
 import TasksPage from './pages/tasks/TasksPage'
 import ProjectsPage from './pages/projects/ProjectsPage'
-
+import MailPage from './pages/mail/MailPage'
+import FileManagerPage from './pages/mail/FileManagerPage'
+import ChatPage from './pages/mail/ChatPage'
+import NotesPage from './pages/contact/NotesPage'
+import ContactsPage from './pages/contact/ContactsPage'
+import ProfilePage from './components/ProfilePage'
 
 const EmptyView = ({ name }) => (
   <div className="p-6 bg-white rounded-2xl border border-gray-100 shadow-sm">
     <h2 className="text-xl font-bold text-gray-800">{name} Screen</h2>
-    <p className="text-gray-500 mt-1">Screen is in still progress</p>
+    <p className="text-gray-500 mt-1">Screen is still in progress</p>
   </div>
 );
 
 const ProtectedRoute = () => {
-  const session = localStorage.getItem('userSession');
+  const session = sessionStorage.getItem('userSession');
   const location = useLocation();
 
   if (!session) {
@@ -34,7 +39,7 @@ const ProtectedRoute = () => {
 };
 
 const PublicRoute = ({ children }) => {
-  const session = localStorage.getItem('userSession');
+  const session = sessionStorage.getItem('userSession');
   
   if (session) {
     return <Navigate to="/dashboard" replace />;
@@ -59,9 +64,10 @@ function App() {
         } />
 
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
-
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/profile" element={<ProfilePage />} />
+
           <Route path="/task" element={<TasksPage />} />
           
           <Route path="/ecommerce">
@@ -73,10 +79,11 @@ function App() {
 
           <Route path="/calendar" element={<Calendar name="Calendar" />} />
           <Route path="/projects" element={<ProjectsPage name="Projects" />} />
-          <Route path="/file-manager" element={<EmptyView name="File Manager" />} />
-          <Route path="/mail" element={<EmptyView name="Mail" />} />
-          <Route path="/chat" element={<EmptyView name="Chat" />} />
-          <Route path="/notes" element={<EmptyView name="Notes" />} />
+          <Route path="/file-manager" element={<FileManagerPage name="File Manager" />} />
+          <Route path="/mail" element={<MailPage name="Mail" />} />
+          <Route path="/chat" element={<ChatPage name="Chat" />} />
+          <Route path="/notes" element={<NotesPage name="Notes" />} />
+          <Route path="/contact" element={<ContactsPage name="Contact" />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/dashboard" replace />} />

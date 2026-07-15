@@ -12,10 +12,8 @@ import {
   X,
   Filter
 } from 'lucide-react';
-// Import your standalone modular file here:
 import AddProjectModal from './AddProjectModal';
 
-// --- Fallback Icon for dynamically created custom user projects ---
 const CustomProjectIcon = ({ title }) => {
   const letters = title ? title.substring(0, 2).toUpperCase() : 'PR';
   return (
@@ -25,7 +23,6 @@ const CustomProjectIcon = ({ title }) => {
   );
 };
 
-// --- SVGs Brand Identity Vectors ---
 const DropboxIcon = () => (
   <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 shrink-0">
     <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current"><path d="M6 2l6 4-6 4-6-4 6-4zm12 0l6 4-6 4-6-4 6-4zM6 14l6 4-6 4-6-4 6-4zm12 0l6 4-6 4-6-4 6-4zM12 6.5l6 4-6 4-6-4 6-4z" /></svg>
@@ -93,13 +90,11 @@ const MessengerIcon = () => (
 );
 
 export default function ProjectsPage() {
-  // --- Layout Views and Interactive Open States ---
   const [activeCategory, setActiveCategory] = useState('all'); 
   const [viewMode, setViewMode] = useState('grid'); 
   const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
-  const [addModalOpen, setAddModalOpen] = useState(false); // Modal trigger state
+  const [addModalOpen, setAddModalOpen] = useState(false); 
 
-  // --- Filter Pipeline States ---
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedLabels, setSelectedLabels] = useState(['Mobile']); 
   const [selectedMembers, setSelectedMembers] = useState(['Shane Black']);
@@ -112,7 +107,6 @@ export default function ProjectsPage() {
     timeframe: 'anytime'
   });
 
-  // --- Dynamic Centralized State Dataset ---
   const [projectsDataset, setProjectsDataset] = useState([
     { id: 1, title: 'App Development', company: 'Dropbox, Inc.', desc: 'Create a mobile application on iOS and Android devices.', progress: 50, timeLeft: '1 week left', isHot: false, status: 'started', label: 'Mobile', icon: <DropboxIcon />, avatars: ['https://i.pravatar.cc/150?img=33', 'https://i.pravatar.cc/150?img=68', 'https://i.pravatar.cc/150?img=12'], staff: ['Shane Black', 'Alex River'] },
     { id: 2, title: 'Website Redesign', company: 'GitLab Inc.', desc: 'It is necessary to develop a website redesign in a corporate style.', progress: 75, timeLeft: '1 week left', isHot: false, status: 'started', label: 'Web UI', icon: <GitLabIcon />, avatars: ['https://i.pravatar.cc/150?img=33', 'https://i.pravatar.cc/150?img=68', 'https://i.pravatar.cc/150?img=12'], staff: ['Shane Black'] },
@@ -125,7 +119,6 @@ export default function ProjectsPage() {
     { id: 9, title: 'App Development', company: 'Facebook, Inc.', desc: 'Create a mobile application on iOS and Android devices.', progress: 50, timeLeft: '1 week left', isHot: false, status: 'started', label: 'Mobile', icon: <MessengerIcon />, avatars: ['https://i.pravatar.cc/150?img=33', 'https://i.pravatar.cc/150?img=68'], staff: ['Shane Black'] }
   ]);
 
-  // --- Form Insertion Action Callback ---
   const handleCreateProject = (projectData) => {
     const newProjectItem = {
       id: Date.now(),
@@ -142,11 +135,9 @@ export default function ProjectsPage() {
       staff: projectData.staff
     };
 
-    // Prepend item seamlessly into state tracking array arrays
     setProjectsDataset(prev => [newProjectItem, ...prev]);
   };
 
-  // --- Real-time Memoized Processing Pipeline ---
   const processedData = useMemo(() => {
     return projectsDataset.filter(item => {
       if (activeCategory !== 'all' && item.status !== activeCategory) return false;
@@ -162,7 +153,6 @@ export default function ProjectsPage() {
     });
   }, [activeCategory, appliedFilters, projectsDataset]);
 
-  // Tab counters update metrics smoothly with live array mutations
   const categoriesMetric = useMemo(() => {
     return {
       all: projectsDataset.length,
@@ -344,7 +334,6 @@ export default function ProjectsPage() {
                 <button onClick={() => setFilterDrawerOpen(false)} className="p-2 hover:bg-gray-100 rounded-full text-gray-400 hover:text-gray-600 transition-colors"><X size={20} /></button>
               </div>
 
-              {/* Text Query Input Block */}
               <div className="space-y-2">
                 <label className="text-xs font-bold text-gray-400 uppercase tracking-wider">Keywords</label>
                 <div className="relative">

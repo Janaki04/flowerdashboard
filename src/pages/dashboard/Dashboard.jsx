@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState,useRef} from 'react';
 import { 
   Download, 
   Calendar, 
@@ -6,8 +6,11 @@ import {
   TrendingUp, 
   Users, 
   MoreHorizontal,
+  ChevronDown,
+  Printer,
   ArrowUpRight,
-  ArrowDownRight
+  ArrowDownRight,
+  FileSpreadsheet, FileText, FileCode,
 } from 'lucide-react';
 import {
   ResponsiveContainer,
@@ -81,17 +84,40 @@ const transactions = [
 ];
 
 export default function Dashboard() {
+    const [isExportOpen, setIsExportOpen] = useState(false);
+      const exportRef = useRef(null);
+    
+  
   return (
     <div className="space-y-6 pb-12">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h1 className="text-2xl font-bold text-gray-800">Overview</h1>
         <div className="flex items-center gap-3 w-full sm:w-auto">
-          <button className="p-2.5 bg-white border border-gray-100 rounded-xl hover:bg-gray-50 shadow-sm text-gray-600 transition-colors">
-            <Download size={18} />
-          </button>
-          <div className="flex items-center gap-2 bg-white border border-gray-100 px-4 py-2 rounded-xl shadow-sm text-sm font-medium text-gray-600 hover:bg-gray-50 transition-colors cursor-pointer w-full sm:w-auto justify-between">
-            <span>Last 7 days</span>
-            <Calendar size={16} className="text-gray-400" />
+             <div className="relative w-full sm:w-auto" ref={exportRef}>
+            <button 
+              onClick={() => setIsExportOpen(!isExportOpen)}
+              className="flex items-center justify-center gap-2 px-4 py-2 bg-white border border-gray-200/80 rounded-xl hover:bg-gray-50 text-sm font-semibold text-gray-600 shadow-sm w-full sm:w-auto"
+            >
+              <Download size={16} />
+              <span>Export</span>
+              <ChevronDown size={14} className={`text-gray-400 transition-transform duration-200 ${isExportOpen ? 'rotate-180' : ''}`} />
+            </button>
+
+            {isExportOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-100 rounded-2xl shadow-xl p-2 space-y-0.5 z-50">
+                {[
+                  { name: 'Print', icon: <Printer size={16} /> },
+                  { name: 'Excel', icon: <FileSpreadsheet size={16} /> },
+                  { name: 'PDF', icon: <FileText size={16} /> },
+                  { name: 'CSV', icon: <FileCode size={16} /> },
+                ].map((option) => (
+                  <button key={option.name} onClick={() => setIsExportOpen(false)} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-600 rounded-xl hover:bg-gray-50 text-left">
+                    <span className="text-gray-400">{option.icon}</span>
+                    <span>{option.name}</span>
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

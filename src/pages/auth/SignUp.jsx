@@ -24,11 +24,6 @@ export default function SignUp() {
       return;
     }
 
-    if (password !== confirmPassword) {
-      alert("Passwords do not match!");
-      return;
-    }
-
     if (!acceptTerms) {
       alert("You must accept the Terms and Conditions to proceed.");
       return;

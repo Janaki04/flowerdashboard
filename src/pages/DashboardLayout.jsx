@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Sidebar from '../components/Sidebar'; 
 import Header from '../components/Header'; 
 
 const DashboardLayout = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const location = useLocation();
+
+ const collapsedRoutes = ['/mail', '/file-manager', '/chat'];
+const isMailScreen = collapsedRoutes.includes(location.pathname);
 
   return (
     <div className="flex h-screen w-full bg-[#f8fafc] overflow-hidden font-sans antialiased">
-      
-      <Sidebar isOpen={isSidebarOpen} setIsOpen={isSidebarOpen} />
-
-      <div className="flex flex-col flex-1 min-w-0 h-screen lg:pl-[260px]">
+      <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+      <div className={`
+        flex flex-col flex-1 min-w-0 h-screen transition-all duration-300 ease-in-out
+        ${isMailScreen ? 'lg:pl-[76px]' : 'lg:pl-[260px]'}
+      `}>
         
         <Header onMenuClick={() => setIsSidebarOpen(true)} />
 

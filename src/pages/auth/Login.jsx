@@ -10,15 +10,7 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [alertMessage, setAlertMessage] = useState(null);
   const navigate=useNavigate()
-
-  useEffect(() => {
-    const savedEmail = sessionStorage.getItem('rememberedEmail');
-    if (savedEmail) {
-      setEmail(savedEmail);
-      setRememberMe(true);
-    }
-  }, []);
-
+  
   const handleSubmit = (e) => {
     e.preventDefault();
 
