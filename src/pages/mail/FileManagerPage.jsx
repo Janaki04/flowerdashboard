@@ -37,7 +37,10 @@ export default function FileManagerPage() {
   ];
 
   return (
-    <div className="flex h-[calc(100vh-110px)] w-full border border-gray-100 bg-white rounded-2xl overflow-hidden shadow-sm">
+    <>
+          <h1 className="text-start text-3xl font-semibold text-[#212529] tracking-tight">File Manager</h1>
+
+    <div className="flex h-[calc(100vh-110px)]font-sans w-full border border-gray-100 bg-white rounded-2xl overflow-hidden shadow-sm">
       <div className="hidden xl:flex flex-col w-64 border-r border-gray-100 p-4 shrink-0 bg-white justify-between">
         <div className="space-y-4">
           <p className="px-3 text-xs font-bold text-gray-400 uppercase tracking-wider">Folders</p>
@@ -206,5 +209,7 @@ export default function FileManagerPage() {
       </div>
 
     </div>
+    </>
+
   );
 }

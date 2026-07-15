@@ -1,16 +1,17 @@
 import { X } from 'lucide-react';
+import { toast } from 'react-toastify';
 
 export default function AddEventModal({ isOpen, onClose }) {
   if (!isOpen) return null;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Event Created Successfully!');
+    toast.success('Event Created Successfully!');
     onClose();
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 flex font-sans items-center justify-center bg-black/40 p-4 backdrop-blur-sm">
       <div className="bg-white w-full max-w-[520px] rounded-2xl shadow-xl border border-[#e9ecef] overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-200">
         
         <div className="flex items-center justify-between px-6 py-5 border-b border-[#e9ecef]">

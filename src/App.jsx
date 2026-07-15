@@ -15,6 +15,8 @@ import ChatPage from './pages/mail/ChatPage'
 import NotesPage from './pages/contact/NotesPage'
 import ContactsPage from './pages/contact/ContactsPage'
 import ProfilePage from './components/ProfilePage'
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const EmptyView = ({ name }) => (
   <div className="p-6 bg-white rounded-2xl border border-gray-100 shadow-sm">
@@ -88,6 +90,16 @@ function App() {
 
         <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
+        <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        pauseOnHover
+        draggable
+        theme="light"
+      />
     </BrowserRouter>
   )
 }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X, Heart, Minus, Plus, Image as ImageIcon } from 'lucide-react';
+import { toast } from 'react-toastify';
 
 export default function ProductDetailModal({ isOpen, onClose, product }) {
   const [quantity, setQuantity] = useState(1);
@@ -15,7 +16,7 @@ export default function ProductDetailModal({ isOpen, onClose, product }) {
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-in fade-in duration-200">
+    <div className="fixed font-sans inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4 animate-in fade-in duration-200">
       <div className="bg-white rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto shadow-2xl relative p-8 sm:p-12 flex flex-col md:flex-row gap-8 sm:gap-12 animate-in zoom-in-95 duration-200">
         <button 
           onClick={onClose}
@@ -72,7 +73,7 @@ export default function ProductDetailModal({ isOpen, onClose, product }) {
 
           <div className="flex gap-3">
             <button 
-              onClick={() => alert('Added to cart')}
+              onClick={() => toast.success('Added to cart')}
               className="flex-1 bg-[#478e4d] hover:bg-[#3d7a42] text-white font-bold text-sm py-3.5 rounded-xl shadow-md transition-colors active:scale-[0.99]"
             >
               Add to Cart

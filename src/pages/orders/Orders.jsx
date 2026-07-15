@@ -81,7 +81,7 @@ export default function Orders() {
   };
 
   return (
-    <div className="bg-[#f8f9fa] min-h-screen text-[#6c757d] font-sans antialiased selection:bg-green-100">
+    <div className="bg-[#f8f9fa] font-sans min-h-screen text-[#6c757d] font-sans antialiased selection:bg-green-100">
       <div className="mx-auto space-y-7">
 
         <div className="flex justify-between items-center px-1">

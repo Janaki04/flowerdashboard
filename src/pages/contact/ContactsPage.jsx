@@ -91,7 +91,7 @@ export default function ContactsPage() {
   );
 
   return (
-    <div className="w-full bg-[#f8fafc] min-h-screen">
+    <div className="w-full bg-[#f8fafc] font-sans min-h-screen">
       
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-3xl font-bold text-gray-800">Contacts</h1>

@@ -15,7 +15,7 @@ export default function OrderDetailModal({ isOpen, onClose, order }) {
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[#000000]/30 backdrop-blur-[2px] p-4 animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 font-sans flex items-center justify-center bg-[#000000]/30 backdrop-blur-[2px] p-4 animate-in fade-in duration-200">
        
       <div className="bg-white rounded-3xl w-full max-w-[940px] max-h-[90vh] overflow-y-auto shadow-[0_20px_60px_rgba(0,0,0,0.08)] relative p-8 sm:p-12 flex flex-col md:flex-row gap-10 sm:gap-14 animate-in zoom-in-95 duration-200">
         <button 

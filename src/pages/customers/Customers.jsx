@@ -95,7 +95,7 @@ export default function Customers() {
             </div>
 
             <button 
-              onClick={() => alert('Add Customer functionality triggered')}
+              onClick={() => toast.info('Add Customer functionality triggered')}
               className="flex items-center justify-center bg-[#449352] hover:bg-[#387a43] text-white p-2.5 rounded-xl shadow-sm transition-colors duration-150 active:scale-[0.98]"
             >
               <Plus size={18} className="stroke-[2.5]" />

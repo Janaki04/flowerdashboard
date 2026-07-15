@@ -170,7 +170,7 @@ const [userData, setUserData] = useState({ name: 'ArtTemplate', detail: 'Manager
   };
 
   return (
-    <div className="w-full min-h-screen bg-[#f8fafc] p-4 sm:p-6 lg:p-8">
+    <div className="w-full min-h-screen bg-[#f8fafc] font-sans p-4 sm:p-6 lg:p-8">
       <div className="max-w-[1280px] mx-auto flex flex-col lg:flex-row gap-6 items-start">
         <div className="w-full lg:w-80 bg-white rounded-3xl border border-gray-100 p-6 shadow-sm flex flex-col shrink-0 gap-6">
           <div className="flex flex-col items-center text-center pb-6 border-b border-gray-100">

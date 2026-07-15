@@ -89,7 +89,7 @@ export default function Dashboard() {
     
   
   return (
-    <div className="space-y-6 pb-12">
+    <div className="space-y-6 pb-12 font-sans">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h1 className="text-2xl font-bold text-gray-800">Overview</h1>
         <div className="flex items-center gap-3 w-full sm:w-auto">

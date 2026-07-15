@@ -31,7 +31,7 @@ export default function AddProductDrawer({ isOpen, onClose, onSave }) {
   };
 
   return (
-    <div className={`fixed inset-0 z-50 overflow-hidden transition-opacity duration-300 ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+    <div className={`fixed font-sans inset-0 z-50 overflow-hidden transition-opacity duration-300 ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
       <div className="absolute inset-0 bg-gray-900/40 backdrop-blur-[2px] transition-opacity" onClick={onClose} />
 
       <div className="absolute inset-y-0 right-0 max-w-full flex pl-10">

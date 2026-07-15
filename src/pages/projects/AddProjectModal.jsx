@@ -32,7 +32,7 @@ export default function AddProjectModal({ isOpen, onClose, onSubmit }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto flex items-center justify-center p-4 bg-black/40 backdrop-blur-[2px]">
+    <div className="fixed inset-0 z-50 font-sans overflow-y-auto flex items-center justify-center p-4 bg-black/40 backdrop-blur-[2px]">
       <div className="absolute inset-0" onClick={onClose} />
       <div className="relative w-full max-w-[500px] bg-white rounded-3xl p-6 shadow-2xl space-y-5 z-10 animate-in zoom-in-95 duration-150">
         <div className="flex items-center justify-between">

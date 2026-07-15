@@ -26,7 +26,7 @@ export default function ComposeMailModal({ isOpen, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+    <div className="fixed inset-0 z-50 flex items-center font-sans justify-center p-4 sm:p-6">
       <div className="absolute inset-0 bg-black/40 backdrop-blur-xs" onClick={onClose} />
       <div className="relative bg-white w-full max-w-[620px] rounded-3xl shadow-2xl flex flex-col max-h-[90vh] overflow-hidden border border-gray-100 animate-in fade-in zoom-in-95 duration-200">
         <div className="flex items-center justify-between px-6 pt-6 pb-4 bg-white">

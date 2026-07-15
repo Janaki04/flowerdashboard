@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import image from "../../assets/Illustration.png"
+import { toast } from 'react-toastify';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -10,12 +11,12 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [alertMessage, setAlertMessage] = useState(null);
   const navigate=useNavigate()
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!email || !password) {
-      alert("Please fill in all fields.");
+      toast.error("Please fill in all fields.");
       return;
     }
 
@@ -27,10 +28,9 @@ export default function Login() {
 
     sessionStorage.setItem('userSession', JSON.stringify({ email, isLoggedIn: true }));
 
-    setAlertMessage(`Success! Logged in successfully as ${email}`);
+    toast.success(`Success! Logged in successfully as ${email}`);
     navigate('/dashboard');
     
-    setTimeout(() => setAlertMessage(null), 4000);
   };
 
   return (
@@ -65,7 +65,7 @@ export default function Login() {
 
               <button 
                 type="button"
-                onClick={() => alert("Google Login functionality triggered.")}
+                onClick={() => toast.success("Google Login functionality triggered.")}
                 className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-white border border-gray-200/90 rounded-xl hover:bg-gray-50 transition-all text-sm font-semibold text-gray-600 shadow-sm"
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24">
@@ -126,7 +126,7 @@ export default function Login() {
                   </label>
                   <button 
                     type="button" 
-                    onClick={() => alert("Redirecting to password recovery...")}
+                    onClick={() => toast.info("Redirecting to password recovery...")}
                     className="text-[#21943A] hover:underline"
                   >
                     Forgot Password?

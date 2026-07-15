@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useMemo } from 'react';
 import {Plus,ChevronDown,ChevronUp,Paperclip,MessageSquare,Calendar,MoreHorizontal,SlidersHorizontal,CheckCircle2,Search,Layers,FileText,Trash2,Archive,CheckSquare,ArrowUpDown,Move,FolderPlus,UserPlus,Check,X} from 'lucide-react';
+import { toast } from 'react-toastify';
 
 export default function TasksPage() {
   const [subtasksExpanded, setSubtasksExpanded] = useState(true);
@@ -457,7 +458,7 @@ export default function TasksPage() {
                   </div>
                 ))}
                 <button 
-                  onClick={() => alert(`Add item directly to ${col.title}`)}
+                  onClick={() => toast.info(`Add item directly to ${col.title}`)}
                   className="w-full py-2 flex items-center justify-center bg-white hover:bg-gray-50 border border-gray-200/60 rounded-xl text-gray-500 hover:text-gray-700 transition-all shadow-sm group"
                 >
                   <div className="w-6 h-6 flex items-center justify-center bg-[#f1fcf4] text-[#449352] group-hover:bg-[#449352] group-hover:text-white rounded-full transition-colors">

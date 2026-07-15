@@ -78,7 +78,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
       )}
 
       <aside className={`
-        fixed top-0 left-0 bottom-0 z-40
+        fixed top-0 left-0 bottom-0 z-40 font-sans
         ${isMailScreen ? 'w-[260px] lg:w-[76px] p-5 lg:p-3 lg:items-center' : 'w-[260px] p-5'} bg-white border-r border-gray-100
         flex flex-col h-screen overflow-y-auto
         transform transition-all duration-300 ease-in-out

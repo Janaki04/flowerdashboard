@@ -56,7 +56,11 @@ export default function MailPage() {
   const currentEmail = emails.find(e => e.id === selectedEmail) || emails[0];
 
   return (
-    <div className="flex h-[calc(100vh-110px)] w-full border border-gray-100 bg-white rounded-2xl overflow-hidden shadow-sm">
+    <>
+          <h1 className="text-start text-3xl font-semibold text-[#212529] tracking-tight">Mail</h1>
+
+    <div className="flex h-[calc(100vh-110px)] font-sans w-full border border-gray-100 bg-white rounded-2xl overflow-hidden shadow-sm">
+      
       <div className="hidden xl:flex flex-col w-64 border-r border-gray-100 p-4 shrink-0 bg-white">
         <button 
         onClick={() => setIsComposeOpen(true)}
@@ -277,5 +281,7 @@ export default function MailPage() {
         onClose={() => setIsComposeOpen(false)} 
       />
     </div>
+    </>
+
   );
 }

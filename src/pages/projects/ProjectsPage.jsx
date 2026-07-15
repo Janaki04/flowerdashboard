@@ -178,7 +178,7 @@ export default function ProjectsPage() {
 
   return (
     <>
-    <div className="bg-[#f8f9fa] min-h-screen text-gray-600 font-sans antialiased p-4 sm:p-8 relative overflow-x-hidden">
+    <div className="bg-[#f8f9fa] font-sans min-h-screen text-gray-600 font-sans antialiased p-4 sm:p-8 relative overflow-x-hidden">
       <div className="max-w-[1400px] mx-auto space-y-6">
         <div className="flex justify-between items-center">
           <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 tracking-tight">Projects</h1>

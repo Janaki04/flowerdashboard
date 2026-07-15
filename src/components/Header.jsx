@@ -29,7 +29,6 @@ export default function Header({ onMenuClick }) {
     { id: 6, name: "Robert Edwards", time: "Yesterday", active: true, img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150" }
   ]);
 
-  // Read saved dynamic user account specifics on initial mount
   useEffect(() => {
     const sessionData = sessionStorage.getItem('userSession');
     const registeredData = sessionStorage.getItem('registeredUser');
@@ -39,7 +38,6 @@ export default function Header({ onMenuClick }) {
       
       if (registeredData) {
         const parsedRegister = JSON.parse(registeredData);
-        // Prioritize full name if available
         setUserData({
           name: parsedRegister.fullName || parsedSession.email,
           detail: parsedSession.email
@@ -76,7 +74,7 @@ export default function Header({ onMenuClick }) {
   };
 
   return (
-    <header className="w-full h-16 bg-white border-b border-gray-100 px-6 flex items-center justify-between select-none relative">
+    <header className="w-full h-16 bg-white font-sans border-b border-gray-100 px-6 flex items-center justify-between select-none relative">
       
       <div className="flex items-center">
         <button 
@@ -182,11 +180,9 @@ export default function Header({ onMenuClick }) {
                     <h4 className="text-[14px] font-bold text-gray-800 truncate">{userData.name}</h4>
                     <p className="text-xs text-gray-400 font-medium mt-0.5 truncate">{userData.detail}</p>
                   </div>
-                  <span className="flex items-center justify-center w-4 h-4 text-[10px] font-bold text-white bg-red-400 rounded-full flex-shrink-0">8</span>
                 </div>
                 <hr className="border-gray-100/70 my-1 mx-4" />
                 <div className="px-2 py-1 space-y-0.5 text-left">
-                  {/* UPDATED PROFILE LINK */}
                   <a 
                     href="#profile" 
                     onClick={(e) => {
@@ -199,13 +195,6 @@ export default function Header({ onMenuClick }) {
                     <User size={17} className="text-gray-400" />
                     <span>My Profile</span>
                   </a>
-                  <a href="#messages" onClick={() => setIsProfileOpen(false)} className="flex items-center gap-3 px-3 py-2 text-[13.5px] font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50/80 rounded-xl transition-all"><Mail size={17} className="text-gray-400" /><span>My Messages</span></a>
-                  <a href="#tasks" onClick={() => setIsProfileOpen(false)} className="flex items-center gap-3 px-3 py-2 text-[13.5px] font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50/80 rounded-xl transition-all"><CheckSquare size={17} className="text-gray-400" /><span>My Tasks</span></a>
-                </div>
-                <hr className="border-gray-100/70 my-1 mx-4" />
-                <div className="px-2 py-1 space-y-0.5 text-left">
-                  <a href="#settings" onClick={() => setIsProfileOpen(false)} className="flex items-center gap-3 px-3 py-2 text-[13.5px] font-medium text-gray-700 bg-gray-50/60 font-semibold rounded-xl transition-all"><Settings size={17} className="text-gray-500" /><span>Settings</span></a>
-                  <a href="#lock" onClick={() => setIsProfileOpen(false)} className="flex items-center gap-3 px-3 py-2 text-[13.5px] font-medium text-gray-600 hover:text-gray-900 hover:bg-gray-50/80 rounded-xl transition-all"><Lock size={17} className="text-gray-400" /><span>Lock Screen</span></a>
                 </div>
                 <hr className="border-gray-100/70 my-1 mx-4" />
                 <div className="px-2 pt-1 text-left">

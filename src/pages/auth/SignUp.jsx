@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import image from "../../assets/Illustration.png"
+import { toast } from 'react-toastify';
 
 
 export default function SignUp() {
@@ -20,22 +21,21 @@ export default function SignUp() {
     e.preventDefault();
 
     if (!fullName || !email || !password || !confirmPassword) {
-      alert("Please fill in all required fields.");
+      toast.error("Please fill in all required fields.");
       return;
     }
 
     if (!acceptTerms) {
-      alert("You must accept the Terms and Conditions to proceed.");
+      toast.error("You must accept the Terms and Conditions to proceed.");
       return;
     }
 
     const newUser = { fullName, email, password };
     sessionStorage.setItem('registeredUser', JSON.stringify(newUser));
 
-    setAlertMessage(`Success! Account created for ${fullName}`);
+    toast.success(`Success! Account created for ${fullName}`);
     navigate('/dashboard');
     
-    setTimeout(() => setAlertMessage(null), 4000);
       
     setFullName('');
     setEmail('');
@@ -76,7 +76,7 @@ export default function SignUp() {
 
               <button 
                 type="button"
-                onClick={() => alert("Google Sign-up flow triggered.")}
+                onClick={() => toast.info("Google Sign-up flow triggered.")}
                 className="w-full flex items-center justify-center gap-3 px-4 py-3 bg-white border border-gray-200/90 rounded-xl hover:bg-gray-50 transition-all text-sm font-semibold text-gray-600 shadow-sm"
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24">
@@ -167,7 +167,7 @@ export default function SignUp() {
                     <span>
                       I accept{' '}
                       <span 
-                        onClick={(e) => { e.preventDefault(); alert("Open Terms & Conditions popup"); }} 
+                        onClick={(e) => { e.preventDefault(); toast.info("Open Terms & Conditions popup"); }} 
                         className="text-[#21943A] hover:underline"
                       >
                         Terms and Conditions

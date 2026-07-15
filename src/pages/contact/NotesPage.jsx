@@ -74,7 +74,7 @@ export default function NotesPage() {
   };
 
   return (
-    <div className="w-full min-h-[calc(100vh-110px)] bg-[#f8fafc] p-4 sm:p-6 lg:p-8 rounded-2xl relative">
+    <div className="w-full min-h-[calc(100vh-110px)] bg-[#f8fafc] font-sans p-4 sm:p-6 lg:p-8 rounded-2xl relative">
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-bold text-gray-800">Notes</h1>
         

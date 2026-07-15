@@ -7,7 +7,6 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        // This overrides the default 'font-sans' clean stack with Poppins project-wide
         sans: ['Poppins', 'sans-serif'],
       },
     },

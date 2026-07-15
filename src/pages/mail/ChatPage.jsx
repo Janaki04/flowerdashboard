@@ -86,7 +86,10 @@ export default function ChatPage() {
   ];
 
   return (
-    <div className="flex h-[calc(100vh-110px)] w-full border border-gray-100 bg-white rounded-2xl overflow-hidden shadow-sm">
+    <>
+          <h1 className="text-start text-3xl font-semibold text-[#212529] tracking-tight">Chat</h1>
+
+    <div className="flex h-[calc(100vh-110px)] w-full font-sans border border-gray-100 bg-white rounded-2xl overflow-hidden shadow-sm">
       <div className={`${isMobileSidebarOpen ? 'flex' : 'hidden md:flex'} flex-col w-full md:w-80 border-r border-gray-100 bg-white shrink-0`}>
         {/* Search Header */}
         <div className="p-4 border-b border-gray-100">
@@ -289,5 +292,7 @@ export default function ChatPage() {
 
       </div>
     </div>
+    </>
+
   );
 }

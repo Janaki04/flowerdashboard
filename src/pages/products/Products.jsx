@@ -151,7 +151,7 @@ const handleOpenModal = (product) => {
   };
 
   return (
-    <div className="space-y-6 pb-12 select-none text-gray-700 relative min-h-screen">
+    <div className="space-y-6 pb-12 font-sans select-none text-gray-700 relative min-h-screen">
       
       {alertNotification && (
         <div className="fixed top-5 right-5 z-[100] bg-gray-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 border border-gray-800 animate-in fade-in slide-in-from-top-4 duration-300 text-sm font-semibold">
